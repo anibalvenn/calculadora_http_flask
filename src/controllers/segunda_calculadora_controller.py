@@ -12,8 +12,13 @@ class SegundaCalculadoraController:
         self.fl_mng = FloatManager()
 
     def executa_operacao(self, input: list):
+        input_string = input.split(" ")
+        lista_string = []
+        for i in input_string:
+            lista_string.append(i)
+        input_float_list = self.fl_mng.to_float_list(lista_string)
         try:
-            passo1 = self.__multiplica11(input)
+            passo1 = self.__multiplica11(input_float_list)
             result = self.__get_std_inverter(passo1)     
             
             return { "success": True, "result": result, "input": input }

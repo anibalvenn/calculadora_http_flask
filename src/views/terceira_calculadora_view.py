@@ -5,9 +5,8 @@ class TerceiraCalculadoraViews:
     def terceira_calculadora_view(self) -> list:
         self.__clear()
 
-        print('Terceira Calculadora \n\n')
-        entrada = input('Digite os numeros com espaço simples entre eles: ')
-       
+        entrada = input['entrada']
+
         return entrada
     
 

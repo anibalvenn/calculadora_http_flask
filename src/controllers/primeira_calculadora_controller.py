@@ -1,14 +1,27 @@
+from urllib import response
+from src.controllers.calculadora import Calculator
 from numpy import float
-from msilib import CAB
-from typing import Dict
-from unittest import result
+from src.main.http_types.http_request import HttpRequest
+from src.main.http_types.http_response import HttpResponse
 from src.drivers.calculation_manager import CalculatorManager
 from src.drivers.float_manager import FloatManager
+from src.views.primeira_calculadora_view import PrimeiraCalculadoraViews
 
-class PrimeiraCalculadoraController:
+class PrimeiraCalculadoraController(Calculator):
 
     def __init__(self) -> None:
         self.clc_mng = CalculatorManager()
+
+    def calculate(self, input: HttpRequest) -> HttpResponse:
+        primCalcView= PrimeiraCalculadoraViews()
+        entrada = primCalcView.primeira_calculadora_view(input.body)
+        primCalcControl = PrimeiraCalculadoraController()
+        saida = primCalcControl.processa_operacao(entrada)
+        if saida['success']:
+            return HttpResponse(200, saida)
+        else:
+            return HttpResponse(500, saida['error'])
+
 
     def processa_operacao(self, input: str):
         try:

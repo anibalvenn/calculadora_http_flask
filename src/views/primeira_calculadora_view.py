@@ -1,11 +1,10 @@
 import os
 
 class PrimeiraCalculadoraViews:
-    def primeira_calculadora_view(self) -> str:
+    def primeira_calculadora_view(self, input:dict) -> str:
         self.__clear()
 
-        print('Primeira Calculadora \n\n')
-        entrada = input('Digite o numero: ')
+        entrada = input['entrada']
 
         return entrada
     
