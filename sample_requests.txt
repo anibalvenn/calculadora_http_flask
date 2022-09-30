@@ -1,0 +1,13 @@
+{
+    "calculadora": "1",
+    "entrada": "10"
+}
+{
+    "calculadora": "2",
+    "entrada": "10 20"
+}
+{
+    "calculadora": "3",
+    "entrada": "10 20 90"
+}
+

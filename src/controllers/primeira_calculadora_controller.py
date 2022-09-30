@@ -12,6 +12,7 @@ class PrimeiraCalculadoraController(Calculator):
     def __init__(self) -> None:
         self.clc_mng = CalculatorManager()
 
+    
     def calculate(self, input: HttpRequest) -> HttpResponse:
         primCalcView= PrimeiraCalculadoraViews()
         entrada = primCalcView.primeira_calculadora_view(input.body)

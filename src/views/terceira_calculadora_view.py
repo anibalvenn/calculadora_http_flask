@@ -2,7 +2,7 @@ import os
 
 
 class TerceiraCalculadoraViews:
-    def terceira_calculadora_view(self) -> list:
+    def terceira_calculadora_view(self, input:dict) -> list:
         self.__clear()
 
         entrada = input['entrada']

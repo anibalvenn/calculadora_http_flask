@@ -1,15 +1,30 @@
 from queue import Empty
-from typing import Dict, List
 from unittest import result
+from src.main.http_types.http_request import HttpRequest
+from src.main.http_types.http_response import HttpResponse
 
 from src.drivers.calculation_manager import CalculatorManager
+from src.drivers.calculation_manager import CalculatorManager
+from src.views.segunda_calculadora_view import SegundaCalculadoraViews
 from src.drivers.float_manager import FloatManager
+
+
 
 class SegundaCalculadoraController:
 
     def __init__(self) -> None:
         self.clc_mng = CalculatorManager()
         self.fl_mng = FloatManager()
+
+    def calculate(self, input: HttpRequest) -> HttpResponse:
+        segCalcView= SegundaCalculadoraViews()
+        entrada = segCalcView.segunda_calculadora_view(input.body)
+        segCalcControl = SegundaCalculadoraController()
+        saida = segCalcControl.executa_operacao(entrada)
+        if saida['success']:
+            return HttpResponse(200, saida)
+        else:
+            return HttpResponse(500, saida['error'])
 
     def executa_operacao(self, input: list):
         input_string = input.split(" ")
