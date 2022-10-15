@@ -5,9 +5,6 @@ from src.controllers.primeira_calculadora_controller import PrimeiraCalculadoraC
 from src.main.http_types.http_request import HttpRequest
 from src.main.http_types.http_response import HttpResponse
 from src.controllers.interface.calculator import CalculatorInterface
-from src.views.primeira_calculadora_view import PrimeiraCalculadoraViews
-from src.views.segunda_calculadora_view import SegundaCalculadoraViews
-from src.views.terceira_calculadora_view import TerceiraCalculadoraViews
 
 def request_adapter(request: FlaskRequest, calculator: CalculatorInterface) -> HttpResponse:
     
@@ -20,17 +17,8 @@ def request_adapter(request: FlaskRequest, calculator: CalculatorInterface) -> H
         ipv4=request.remote_addr,
     )
 
-    if http_request.body["calculadora"] == '1':
-        primCalcControl = PrimeiraCalculadoraController()
-        return primCalcControl.calculate(http_request)
 
-    elif http_request.body["calculadora"] == '2':
-        segCalcControl = SegundaCalculadoraController()
-        return segCalcControl.calculate(http_request)
-    elif http_request.body["calculadora"] == '3':
-       tercCalcControl=TerceiraCalculadoraController()
-       return tercCalcControl.calculate(http_request)
-    
+
 
     http_response = calculator.calculate(http_request)
     return http_response
