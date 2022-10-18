@@ -1,11 +1,10 @@
 from urllib import response
 from src.controllers.calculadora import Calculator
 from numpy import float
-from src.main.http_types.http_request import HttpRequest
-from src.main.http_types.http_response import HttpResponse
+from src.views.http_types.http_request import HttpRequest
+from src.views.http_types.http_response import HttpResponse
 from src.drivers.calculation_manager import CalculatorManager
 from src.drivers.float_manager import FloatManager
-from src.views.primeira_calculadora_view import PrimeiraCalculadoraViews
 
 class PrimeiraCalculadoraController(Calculator):
 
@@ -13,21 +12,19 @@ class PrimeiraCalculadoraController(Calculator):
         self.clc_mng = CalculatorManager()
 
     
-    def calculate(self, input: HttpRequest) -> HttpResponse:
-        primCalcView= PrimeiraCalculadoraViews()
-        entrada = primCalcView.primeira_calculadora_view(input.body)
+    def calculate(self, input: list) -> HttpResponse:
+ 
         primCalcControl = PrimeiraCalculadoraController()
-        saida = primCalcControl.processa_operacao(entrada)
+        saida = primCalcControl.processa_operacao(input[0])
         if saida['success']:
             return HttpResponse(200, saida)
         else:
             return HttpResponse(500, saida['error'])
 
 
-    def processa_operacao(self, input: str):
+    def processa_operacao(self, input_float: float):
         try:
-            fl_mng = FloatManager()
-            input_float= fl_mng.to_float(input)
+           
             divide_por_tres= self.__divide_por_tres(input_float)
             primeiro_algarismo = self.__primeira_operacao(divide_por_tres)
             segundo_algarismo = self.__segunda_operacao(divide_por_tres)
