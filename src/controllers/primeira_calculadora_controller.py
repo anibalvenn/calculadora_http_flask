@@ -14,18 +14,22 @@ class PrimeiraCalculadoraController(Calculator):
     
     def calculate(self, input: list) -> HttpResponse:
  
-        primCalcControl = PrimeiraCalculadoraController()
-        saida = primCalcControl.processa_operacao(input[0])
-        if saida['success']:
-            return HttpResponse(200, saida)
+        if len(input)==1:
+            primCalcControl = PrimeiraCalculadoraController()
+            saida = primCalcControl.processa_operacao(input[0])
+            if saida['success']:
+                return HttpResponse(200, saida)
+            else:
+                return HttpResponse(500, saida['error'])
         else:
-            return HttpResponse(500, saida['error'])
+            raise Exception("O input deve conter apenas um numero") 
+
 
 
     def processa_operacao(self, input_float: float):
         try:
            
-            divide_por_tres= self.__divide_por_tres(input_float)
+            divide_por_tres= self.divide_por_tres(input_float)
             primeiro_algarismo = self.__primeira_operacao(divide_por_tres)
             segundo_algarismo = self.__segunda_operacao(divide_por_tres)
             terceiro_algarismo = divide_por_tres
@@ -37,7 +41,7 @@ class PrimeiraCalculadoraController(Calculator):
         except Exception as exception:
             return { "success": False, "error": str(exception) }
 
-    def __divide_por_tres(self, input: str) -> float:
+    def divide_por_tres(self, input: str) -> float:
 
         result = input/3
 

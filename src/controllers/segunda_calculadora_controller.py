@@ -23,6 +23,7 @@ class SegundaCalculadoraController:
             return HttpResponse(500, saida['error'])
 
     def executa_operacao(self, input_float_list: list):
+        if len(input_float_list)<=1: raise Exception('Input com pelo menos dois numeros')
 
         try:
             passo1 = self.__multiplica11(input_float_list)
@@ -34,7 +35,6 @@ class SegundaCalculadoraController:
 
     def __multiplica11(self, input: list) -> list:
         output2 = []
-        if input is Empty: raise Exception('Lista vazia!')
         input_float = self.fl_mng.to_float_list(input)
         
         if input_float is Empty: raise Exception('Lista vazia!')
